@@ -2,7 +2,9 @@ package com.sumin.curd_ex_mysql.controller;
 
 
 import com.sumin.curd_ex_mysql.payload.CategoryDto;
+import com.sumin.curd_ex_mysql.payload.PostDto;
 import com.sumin.curd_ex_mysql.service.CategoryService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -42,9 +44,21 @@ public class CategoryController {
     public ResponseEntity<CategoryDto> getCategoryById(@PathVariable(name = "id") long id){
         return new ResponseEntity<>(categoryService.getCategoryById(id),HttpStatus.OK);
 
-
     }
 
+    //게시물 수정
+    @PutMapping("{id}")
+    public ResponseEntity<CategoryDto> updateCategoryById(
+            @PathVariable(name = "id") long id,
+            @Valid @RequestBody CategoryDto categoryDto
+    ){
+        return new ResponseEntity<>(categoryService.updateCategoryById(id,categoryDto), HttpStatus.OK);
+    }
 
+    //게시물 삭제
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> delateCategoryById(@PathVariable(name = "id") long id){
+        return new ResponseEntity<>(categoryService.delateCategoryById(id),HttpStatus.OK);
 
+    }
 }
