@@ -18,4 +18,6 @@ public class PostDto {
     @NotEmpty
     @Size(min = 10,message = "post content should have at least 10 characters")
     private String content;
+
+    private Long categoryId;
 }
